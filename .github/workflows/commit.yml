@@ -1,0 +1,33 @@
+name: Commit file on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  commit-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create or update file
+        run: |
+          echo "This is the content of the file" > my_file.txt
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Commit changes
+        run: |
+          git add my_file.txt
+          git commit -m "Update my_file.txt"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

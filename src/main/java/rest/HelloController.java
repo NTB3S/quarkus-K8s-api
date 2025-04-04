@@ -11,4 +11,16 @@ public class HelloController {
     public HelloResource get() {
         return new HelloResource("Hello, World!");
     }
+
+    @GET
+    @Path("helloV2")
+    public HelloResource getV2() {
+        return new HelloResource("Hello, World V2!");
+    }
+
+    @GET
+    @Path("helloV3")
+    public HelloResource getV3() {
+        return new HelloResource("Hello, World V3!");
+    }
 }
